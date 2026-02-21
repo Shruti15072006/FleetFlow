@@ -1,6 +1,8 @@
+// server/config/db.js
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
+// Create sequelize instance
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -12,14 +14,19 @@ const sequelize = new Sequelize(
   },
 );
 
+// Test connection function
 const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    console.log("✅ MySQL Connected");
+    console.log("✅ MySQL Connected Successfully");
+    console.log("📊 Database:", process.env.DB_NAME);
+    console.log("👤 User:", process.env.DB_USER);
+    return true;
   } catch (error) {
     console.error("❌ DB connection failed:", error.message);
-    process.exit(1);
+    return false;
   }
 };
 
+// Export both
 module.exports = { sequelize, connectDB };

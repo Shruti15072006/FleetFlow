@@ -1,28 +1,15 @@
+// server/models/Vehicle.js
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db");
 
-const Vehicle = sequelize.define(
-  "Vehicle",
-  {
-    id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-
-    vehicleNumber: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-
-    capacityKg: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-
-    status: {
-      type: DataTypes.ENUM("available", "on_trip", "in_shop"),
-      defaultValue: "available",
-    },
+const Vehicle = sequelize.define("Vehicle", {
+  name: { type: DataTypes.STRING, allowNull: false },
+  capacity: { type: DataTypes.INTEGER, allowNull: false },
+  status: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: "available",
   },
-  { timestamps: true },
-);
+});
 
 module.exports = Vehicle;
